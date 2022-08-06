@@ -1,0 +1,28 @@
+.navbar-conteiner {
+  background: red;
+  width: 100%;
+  height: 80px;
+}
+.categories-conteiner {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+  height: 100%;
+
+  margin-left: 40px;
+}
+.categories-conteiner button {
+  font-size: 20px;
+  background: none;
+  border: none;
+}
+
+.categories-conteiner button:hover {
+  color: rgb(65, 230, 32);
+  border-bottom: 3px solid rgb(65, 230, 32);
+}
+
+.active {
+  color: rgb(65, 230, 32);
+  border-bottom: 3px solid rgb(65, 230, 32) !important;
+}
