@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap");
+.product-card-conteiner {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+
+  flex: 30%;
+  max-width: 250px;
+  margin: 10px;
+}
+
+.product-card-conteiner:hover {
+  margin: 0;
+  padding: 10px;
+  -webkit-box-shadow: 3px 3px 10px 7px #eeeeee;
+  -moz-box-shadow: 3px 3px 10px 7px #eeeeee;
+  box-shadow: 3px 3px 10px 7px #eeeeee;
+}
+
+.out-of-stock {
+  opacity: 0.6;
+}
+
+.product-image {
+  position: relative;
+}
+
+.card-buy-btn {
+}
+
+.product-image button {
+  position: absolute;
+  height: 45px;
+  width: 45px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid #5ece7b;
+  background-color: #5ece7b;
+  bottom: -5%;
+  right: 5%;
+}
+.product-image button > img {
+    margin-top: 5px;
+    height: 20px;
+    width: 20px;
+
+
+}
+
+.product-image > p {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  text-transform: uppercase;
+}
+
+.product-image img {
+  height: 250px;
+  width: 250px;
+}
+
+.product-name-price {
+  font-family: "Roboto", sans-serif;
+}
+
+.product-name-price p:nth-child(1) {
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+.product-name-price p:nth-child(2) {
+  font-weight: 500;
+  margin-top: 0;
+}
