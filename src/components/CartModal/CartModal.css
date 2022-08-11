@@ -1,0 +1,123 @@
+.darkBG {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 110vw;
+  height: 110vh;
+  z-index: 1;
+  top: 45px;
+  right: -90px;
+  position: absolute;
+}
+
+.modal-postion {
+  position: absolute;
+  z-index: 10;
+  top: 150px;
+  right: -150px;
+  transform: translate(-40%, -15%);
+}
+
+.modal {
+  width: 305px;
+  height: 667px;
+  padding: 20px;
+  background: white;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+}
+
+.cart-headers {
+  padding-top: 0px;
+  font-size: 16px;
+  line-height: 160%;
+  font-style: normal;
+}
+.cart-headers p:nth-child(1) {
+  display: inline;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.cart-headers p:nth-child(2) {
+  display: inline;
+  font-weight: 500;
+}
+
+.cart-conteiner {
+  overflow-y: scroll;
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-detalis-conteiner {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-product-name {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+}
+.cart-product-name p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.color-cart-box-conteiner {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.color-cart-box {
+  border: 1px solid transparent;
+  padding: 1px;
+  height: fit-content;
+}
+
+.color-cart-box:hover {
+  border: 1px solid #5ece7b;
+  cursor: pointer;
+}
+
+.color-cart-box-active {
+  border: 1px solid #5ece7b !important;
+}
+
+.att-cart-box-conteiner {
+  display: flex;
+  flex-direction: row;
+  font-weight: 300;
+  gap: 5px;
+}
+
+.att-cart-box-conteiner button {
+  background: transparent;
+  width: fit-content;
+  min-width: 24px;
+  height: 24px;
+  border: 1px solid black;
+}
+
+.att-cart-box-conteiner button:hover {
+  background: black;
+  color: white;
+}
+
+.att-cart-box {
+  width: 50px;
+  height: 30px;
+  font-size: 10px;
+
+  position: relative;
+  font-weight: 300;
+}
+
+.product-cart-att {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-cart-att p:first-child {
+  margin-bottom: 5px;
+}
