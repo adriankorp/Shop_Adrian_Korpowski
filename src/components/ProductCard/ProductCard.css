@@ -25,17 +25,15 @@
   position: relative;
 }
 
-.card-buy-btn {
-}
-
 .product-image button {
   position: absolute;
   height: 45px;
   width: 45px;
   background: none;
   border: none;
-  cursor: pointer;
+  z-index: 1;
   border-radius: 50%;
+  cursor: pointer;
   border: 2px solid #5ece7b;
   background-color: #5ece7b;
   bottom: -5%;

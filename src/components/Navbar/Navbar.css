@@ -13,7 +13,9 @@
 
 }
 
-.cart-curenncy-conteiner button {
+
+
+.cart-button {
   width: 20px;
   height: 20px;
   background: none;
@@ -61,20 +63,27 @@
 
   margin-left: 70px;
 }
-.categories-conteiner button {
+.categories-conteiner .btn-navbar {
+  margin-top: 25px;
   font-size: 20px;
-  background: none;
-  border: none;
   text-transform: capitalize;
   cursor: pointer;
+  text-align: center;
+  height: 60%;
 }
 
-.categories-conteiner button:hover {
+.btn-navbar > a {
+  display: block;
+  height: 100%;
+
+}
+
+.categories-conteiner .btn-navbar:hover {
   color: #5ece7b;
   border-bottom: 3px solid #5ece7b;
 }
 
 .active {
-  color: #5ece7b;
+  color: #5ece7b !important;
   border-bottom: 3px solid #5ece7b !important;
 }

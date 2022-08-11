@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "./Navbar.css";
-import Select from "react-select";
 import withContext from "../../withContext";
 import { client } from "../../index";
 import { LOAD_CURRENCIES } from "../../GraphQL/Queries";
+import { Link } from "react-router-dom";
+import CartModal from "../CartModal/CartModal";
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,7 @@ class Navbar extends Component {
       clickedCategory: "all",
       categories: ["all", "tech", "clothes"],
       currency: [],
+      show: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -22,13 +24,19 @@ class Navbar extends Component {
     this.props.context.changeCurrency(e.target.value);
   }
 
+  showModal = e => {
+    this.setState({
+      show: !this.state.show
+    });
+  };
+
   componentDidMount() {
     client
       .query({
         query: LOAD_CURRENCIES,
       })
       .then((res) => this.setState({ currency: [...res.data.currencies] }));
-      this.props.context.loadCategory(this.state.clickedCategory)
+    this.props.context.loadCategory(this.state.clickedCategory);
   }
   render() {
     return (
@@ -36,16 +44,25 @@ class Navbar extends Component {
         <div className="categories-conteiner">
           {this.state.categories.map((cat) => {
             return (
-              <button
+              <div
                 key={cat}
-                className={this.state.clickedCategory === cat ? "active" : ""}
-                onClick={() => {
-                  this.props.context.loadCategory(cat)
-                  this.setState({ clickedCategory: cat });
-                }}
+                className={
+                  this.state.clickedCategory === cat
+                    ? "btn-navbar active"
+                    : "btn-navbar"
+                }
               >
-                {cat}
-              </button>
+                <Link
+                  to="/"
+                  onClick={() => {
+                    this.props.context.loadCategory(cat);
+                    this.setState({ clickedCategory: cat });
+                  }}
+                  style={{ color: "inherit", textDecoration: "inherit" }}
+                >
+                  {cat}
+                </Link>
+              </div>
             );
           })}
         </div>
@@ -64,13 +81,19 @@ class Navbar extends Component {
             })}
           </select>
           <div className="cart">
-            <button>
+            <button
+              className="cart-button"
+              onClick={(e) => {
+                this.showModal(e);
+              }}
+            >
               {Object.keys(this.props.context.cart).length > 0 ? (
                 <label>{Object.keys(this.props.context.cart).length}</label>
               ) : (
                 <></>
               )}
             </button>
+            {<CartModal onClose={this.showModal} show={this.state.show} />}
           </div>
         </div>
       </div>

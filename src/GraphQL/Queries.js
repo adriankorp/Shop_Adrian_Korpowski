@@ -55,7 +55,29 @@ export const LOAD_PRODUCTS_OF_CATEGOTY = gql`
 export const LOAD_PRODUCT = gql`
   query ($id: String!) {
     product(id: $id) {
+      id
       name
+      inStock
+      gallery
+      description
+      attributes {
+        id
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
+      }
+      prices {
+        currency {
+          label
+          symbol
+        }
+        amount
+      }
+      brand
     }
   }
 `;

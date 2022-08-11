@@ -1,0 +1,156 @@
+.product-page-conteiner {
+  display: flex;
+  flex-direction: row;
+
+  height: fit-content;
+  margin: 50px;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+.product-mini-images {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+
+  margin-top: 10px;
+}
+
+.product-mini-images img {
+  margin: 0px 10px 10px;
+  width: 125px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.product-mini-images img:hover {
+  border: 2px solid #5ece7b;
+}
+
+.procuct-main-image {
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+.product-out-of-stock {
+  position: relative;
+}
+.product-out-of-stock > p {
+  position: absolute;
+  top: 40%;
+  left: 35%;
+
+  text-transform: uppercase;
+}
+
+.procuct-main-image img {
+  width: 500px;
+  height: 500px;
+}
+
+.product-detalis-conteiner {
+  margin-left: 20px;
+
+  width: 100%;
+}
+
+.product-name {
+  font-size: 20px;
+}
+
+.product-name p:nth-child(1) {
+  margin-bottom: 0;
+}
+
+.product-name p:nth-child(2) {
+  font-weight: 300;
+  margin-top: 10px;
+}
+
+.product-att {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-att p:first-child {
+  margin-bottom: 5px;
+}
+
+.att-box-conteiner {
+  display: flex;
+  flex-direction: row;
+  font-weight: 300;
+  gap: 5px;
+}
+
+.att-box-conteiner button {
+  background: transparent;
+}
+
+.att-box-conteiner button:hover {
+  background: black;
+  color: white;
+}
+
+.att-active {
+  background: black !important;
+  color: white;
+}
+
+.att-box {
+  width: 50px;
+  height: 30px;
+  border: 1px solid black;
+  position: relative;
+  font-weight: 300;
+}
+
+.att-box p {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.color-box-conteiner {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.color-box {
+  border: 1px solid transparent;
+  padding: 1px;
+}
+
+.color-box:hover {
+  border: 1px solid #5ece7b;
+  cursor: pointer;
+}
+
+.color-box-active {
+  border: 1px solid #5ece7b !important;
+}
+
+.btn-add-to-cart button {
+  margin-top: 10px;
+  width: 200px;
+  height: 45px;
+  background: #5ece7b;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.product-description {
+  margin-top: 50px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 159.96%;
+  font-weight: 300;
+  max-width: 300px;
+}
