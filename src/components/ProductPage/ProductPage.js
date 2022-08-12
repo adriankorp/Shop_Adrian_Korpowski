@@ -4,6 +4,7 @@ import { client } from "../../index";
 import { split } from "@apollo/client";
 import "./ProductPage.css";
 
+
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 class ProductPage extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class ProductPage extends Component {
         let { currency, amount } = res.data.product.prices.filter(
           (el) => el.currency.symbol === this.props.context.selectedCurrency
         )[0];
-
+   
         this.setState({
           product: res.data.product,
           mainImage: res.data.product.gallery[0],
@@ -43,7 +44,7 @@ class ProductPage extends Component {
     if (
       prevProps.context.selectedCurrency !== this.props.context.selectedCurrency
     ) {
-      console.log(this.props.context.selectedCurrency);
+
       let currency = this.getPrice();
       this.setState({
         amount: currency.amount,
@@ -162,6 +163,7 @@ class ProductPage extends Component {
               </div>
               <div className="product-attributes">
                 {this.state.product.attributes.map((el) => {
+                  
                   return (
                     <div key={el.id} className={`product-att`}>
                       {el.id === "Color"

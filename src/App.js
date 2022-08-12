@@ -42,21 +42,70 @@ export default class App extends Component {
 
   addToCart = (cartItem) => {
     let cart = this.state.cart;
-    if (cart[cartItem.id]) {
-      cart[cartItem.id].amount += 1;
 
+    if (cart[cartItem.id]) {
+      if (cart[cartItem.id].attributes) {
+      
+        let cartKeys = cart[cartItem.id].productSelectedAttributes;
+        let cartAddedItemKeys = cartItem.productSelectedAttributes;
+        if (JSON.stringify(cartKeys) === JSON.stringify(cartAddedItemKeys)) {
+          cart[cartItem.id].amount += 1;
+        } else {
+          cart[cartItem.id] = cartItem;
+          cart[cartItem.id].amount = 1;
+        }
+      } else {
+        cart[cartItem.id].amount = 1;
+      }
     } else {
       cart[cartItem.id] = cartItem;
-      cart[cartItem.id].amount = 1
+      cart[cartItem.id].amount = 1;
     }
-    
+
     localStorage.setItem("cart", JSON.stringify(cart));
     this.setState({ cart });
   };
 
-  removeFromCart = (cartItemId) => {
+  updateCart = (cartItem) => {
     let cart = this.state.cart;
-    delete cart[cartItemId];
+    if (cart[cartItem.id]) {
+      cart[cartItem.id] = cartItem;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    this.setState({ cart });
+  };
+
+  increaseAmountItem = (cartItem) => {
+    let cart = this.state.cart;
+
+
+    if (cart[cartItem.id]) {
+      cart[cartItem.id].amount += 1;
+      if (cart[cartItem.id].attributes) {
+        cart[cartItem.id].productSelectedAttributes =
+          cartItem.productSelectedAttributes;
+      }
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    this.setState({ cart });
+  };
+
+  decreaseAmountItem = (cartItem) => {
+    let cart = this.state.cart;
+
+    if (cart[cartItem.id]) {
+      if (cart[cartItem.id].amount === 1) {
+        delete cart[cartItem.id];
+      } else {
+        cart[cartItem.id].amount -= 1;
+        if (cart[cartItem.id].attributes) {
+          cart[cartItem.id].productSelectedAttributes =
+            cartItem.productSelectedAttributes;
+        }
+      }
+    }
+
     localStorage.setItem("cart", JSON.stringify(cart));
     this.setState({ cart });
   };
@@ -80,18 +129,17 @@ export default class App extends Component {
           ...this.state,
           changeCurrency: this.changeCurrency,
           loadCategory: this.loadCategory,
-          removeFromCart: this.removeFromCart,
+          decreaseAmountItem: this.decreaseAmountItem,
           addToCart: this.addToCart,
-          login: this.login,
-          addProduct: this.addProduct,
           clearCart: this.clearCart,
-          checkout: this.checkout,
+          increaseAmountItem: this.increaseAmountItem,
+          updateCart: this.updateCart,
         }}
       >
         <Router>
           <Navbar />
           <Routes>
-            <Route exact path="/" element={<ProductList />} />
+            <Route exact path="/category/:name" element={<ProductList />} />
 
             <Route exact path="/product/:id" element={<ProductPage />} />
           </Routes>

@@ -4,17 +4,43 @@ import CartItem from "./CartItem";
 import "./CartModal.css";
 
 class CartModal extends Component {
-
   componentDidMount() {
     this.setState({ cartKeys: Object.keys(this.props.context.cart || {}) });
   }
-
 
   onClose = (e) => {
     this.props.onClose && this.props.onClose(e);
   };
 
-  
+  getTotalPrice() {
+    let cartKeys = Object.keys(this.props.context.cart || {});
+    let selectedCurrency = this.props.context.selectedCurrency;
+    let cart = this.props.context.cart;
+    let total = 0;
+    if (cartKeys) {
+      cartKeys.map((key) => {
+        let price = cart[key].prices.filter(
+          (el) => el.currency.symbol === selectedCurrency
+        )[0].amount;
+
+        total += price * cart[key].amount;
+      });
+    }
+    return total.toFixed(2);
+  }
+
+  getNumberCartItems() {
+    let cartKeys = Object.keys(this.props.context.cart || {});
+    let cart = this.props.context.cart;
+   let total = 0
+    if (cartKeys) {
+      cartKeys.map(key => {
+        total += cart[key].amount
+      })
+      return total
+    }
+    return 0
+  }
 
   render() {
     if (!this.props.show) {
@@ -27,18 +53,31 @@ class CartModal extends Component {
           <div className="modal">
             <div className="cart-headers">
               <p>My Bag</p>
-              <p>, {Object.keys(this.props.context.cart).length} items</p>
+              <p>, {this.getNumberCartItems()} items</p>
             </div>
             <div className="cart-conteiner">
               {Object.keys(this.props.context.cart || {}).map((key) => {
-                
-                  let cartItem = this.props.context.cart[key];
-                  return <CartItem {...cartItem} selectedCurrency = {this.props.context.selectedCurrency}/>
-
-
-    
-
+                let cartItem = this.props.context.cart[key];
+                return (
+                  <CartItem
+                    {...cartItem}
+                    selectedCurrency={this.props.context.selectedCurrency}
+                    increaseAmountItem = {this.props.context.increaseAmountItem}
+                    decreaseAmountItem = {this.props.context.decreaseAmountItem}
+                  />
+                );
               })}
+            </div>
+            <div className="cart-total-value">
+              <p>Total: </p>
+              <p>
+                {this.props.context.selectedCurrency}
+                {this.getTotalPrice()}
+              </p>
+            </div>
+            <div className="checkout-viewbag-box">
+              <button className="viewbag-button">VIEW BAG</button>
+              <button className="checkout-button">CHECKOUT</button>
             </div>
           </div>
         </div>

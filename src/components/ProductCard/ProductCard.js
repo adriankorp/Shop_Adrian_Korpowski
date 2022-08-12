@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./ProductCard.css";
 import withContext from "../../withContext";
+
 class ProductCard extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +26,7 @@ class ProductCard extends Component {
     if (
       prevProps.context.selectedCurrency !== this.props.context.selectedCurrency
     ) {
-      console.log(this.props.context.selectedCurrency);
+
       let currency = this.getPrice()[0];
       this.setState({
         price: currency.amount,
@@ -33,6 +34,13 @@ class ProductCard extends Component {
       });
     }
   }
+
+  addToCartFromCard = (e,item) => {
+    e.preventDefault();
+    let newProductObject = {...item}
+    delete newProductObject.context
+    this.props.context.addToCart({ ...newProductObject });
+  };
 
   getPrice() {
     return this.props.prices.filter(
@@ -52,12 +60,7 @@ class ProductCard extends Component {
               <div className="product-image">
                 <img src={this.props.gallery[0]} alt={this.props.name} />
                 {this.props.attributes.length === 0 ? (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      console.log("dupa");
-                    }}
-                  >
+                  <button onClick={(e) => {this.addToCartFromCard(e,this.props)}}>
                     <img src="cart-shopping-solid.svg" alt="cart" />
                   </button>
                 ) : (

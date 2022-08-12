@@ -10,7 +10,7 @@ class Navbar extends Component {
     super(props);
 
     this.state = {
-      clickedCategory: "all",
+      clickedCategory: "",
       categories: ["all", "tech", "clothes"],
       currency: [],
       show: false,
@@ -24,19 +24,33 @@ class Navbar extends Component {
     this.props.context.changeCurrency(e.target.value);
   }
 
-  showModal = e => {
+  showModal = (e) => {
     this.setState({
-      show: !this.state.show
+      show: !this.state.show,
     });
   };
 
+  getNumberCartItems() {
+    let cartKeys = Object.keys(this.props.context.cart || {});
+    let cart = this.props.context.cart;
+    let total = 0;
+    if (cartKeys) {
+      cartKeys.map((key) => {
+        total += cart[key].amount;
+      });
+      return total;
+    }
+    return 0;
+  }
+
   componentDidMount() {
+    let categoryName = window.location.pathname.split("/")[2];
+    this.props.context.loadCategory(categoryName)
     client
       .query({
         query: LOAD_CURRENCIES,
       })
       .then((res) => this.setState({ currency: [...res.data.currencies] }));
-    this.props.context.loadCategory(this.state.clickedCategory);
   }
   render() {
     return (
@@ -53,7 +67,7 @@ class Navbar extends Component {
                 }
               >
                 <Link
-                  to="/"
+                  to={`/category/${cat}`}
                   onClick={() => {
                     this.props.context.loadCategory(cat);
                     this.setState({ clickedCategory: cat });
@@ -87,8 +101,8 @@ class Navbar extends Component {
                 this.showModal(e);
               }}
             >
-              {Object.keys(this.props.context.cart).length > 0 ? (
-                <label>{Object.keys(this.props.context.cart).length}</label>
+              {this.getNumberCartItems() > 0 ? (
+                <label>{this.getNumberCartItems()}</label>
               ) : (
                 <></>
               )}

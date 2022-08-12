@@ -1,11 +1,11 @@
 .darkBG {
   background-color: rgba(0, 0, 0, 0.2);
   width: 110vw;
-  height: 110vh;
+  height: 100vh;
   z-index: 1;
-  top: 45px;
+  top: 72px;
   right: -90px;
-  position: absolute;
+  position: fixed;
 }
 
 .modal-postion {
@@ -49,9 +49,11 @@
   flex-direction: column;
 }
 
-.cart-detalis-conteiner {
+.cart-detalis {
   display: flex;
   flex-direction: column;
+  width: 150px;
+  max-width: 150px;
 }
 
 .cart-product-name {
@@ -59,8 +61,13 @@
   font-size: 16px;
   line-height: 160%;
 }
-.cart-product-name p {
-  margin-top: 5px;
+.cart-product-name p:nth-child(1) {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.cart-product-name p:nth-child(2) {
+  margin-top: 0px;
   margin-bottom: 5px;
 }
 
@@ -68,6 +75,9 @@
   display: flex;
   flex-direction: row;
   gap: 5px;
+}
+.color-cart-box-conteiner p {
+  margin-top: 10px;
 }
 .color-cart-box {
   border: 1px solid transparent;
@@ -119,5 +129,65 @@
 }
 
 .product-cart-att p:first-child {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+.cart-conteiner-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.cart-product-amount {
+  margin: 25px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cart-product-amount button {
+  background: transparent;
+  border: 1px solid black;
+}
+
+.cart-product-amount button:hover {
+  background: black;
+  color: white;
+}
+
+.cart-product-image img {
+  margin: 10px 0px 10px 10px;
+  width: 121px;
+  max-height: 180px;
+}
+.cart-total-value {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-viewbag-box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.viewbag-button {
+  background: transparent;
+  border: 1px solid black;
+  width: 140px;
+  cursor: pointer;
+}
+
+.viewbag-button:hover {
+  background: black;
+  color: white;
+}
+
+.checkout-button {
+  cursor: pointer;
+  background: #5ece7b;
+  color: white;
+  border: none;
+  width: 140px;
+  height: 43px;
 }

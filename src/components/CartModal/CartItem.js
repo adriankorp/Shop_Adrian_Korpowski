@@ -8,18 +8,19 @@ export default class CartItem extends Component {
     this.state = {
       price: 0,
       symbol: "",
-      productSelectedAttributes:{}
+      productSelectedAttributes: {},
     };
   }
   getPrice() {
     let currency = this.props.prices.filter(
       (el) => el.currency.symbol === this.props.selectedCurrency
     )[0];
-    console.log(currency);
     this.setState({ price: currency.amount, symbol: currency.currency.symbol });
   }
   componentDidMount() {
-    this.setState({productSelectedAttributes: {...this.props.productSelectedAttributes}})
+    this.setState({
+      productSelectedAttributes: { ...this.props.productSelectedAttributes },
+    });
     this.getPrice();
   }
 
@@ -69,25 +70,27 @@ export default class CartItem extends Component {
         <div className="color-cart-box-conteiner">
           {attribute.items.map((el) => {
             return (
-                <>              <div
-                className={`color-cart-box ${
-                  this.state.productSelectedAttributes[attribute.name] ===
-                    el.value && "color-cart-box-active"
-                }`}
-              >
+              <>
+                {" "}
                 <div
-                  onClick={() => this.selectAttribute(el, attribute.name)}
-                  style={{
-                    background: el.value,
-                    border: el.value !== "#FFFFFF" ? "none" : "1px solid black",
-                    width: "16px",
-                    height: "16px",
-             
-                  }}
-                  key={el.id}
-                ></div>
-              </div></>
-
+                  className={`color-cart-box ${
+                    this.state.productSelectedAttributes[attribute.name] ===
+                      el.value && "color-cart-box-active"
+                  }`}
+                >
+                  <div
+                    onClick={() => this.selectAttribute(el, attribute.name)}
+                    style={{
+                      background: el.value,
+                      border:
+                        el.value !== "#FFFFFF" ? "none" : "1px solid black",
+                      width: "16px",
+                      height: "16px",
+                    }}
+                    key={el.id}
+                  ></div>
+                </div>
+              </>
             );
           })}
         </div>
@@ -98,25 +101,56 @@ export default class CartItem extends Component {
   render() {
     return (
       <>
-        <div className="cart-detalis-conteiner">
-          <div className="cart-product-name">
-            <p>{this.props.brand}</p>
-            <p>{this.props.name}</p>
+        <div className="cart-conteiner-item">
+          {" "}
+          <div className="cart-detalis">
+            <div className="cart-product-name">
+              <p>{this.props.brand}</p>
+              <p>{this.props.name}</p>
+            </div>
+            <div className="cart-product-price">
+              {this.state.symbol}
+              {(this.state.price * this.props.amount).toFixed(2)}
+            </div>
+            <div className="cart-product-attributes">
+              {this.props.attributes.map((el) => {
+                return (
+                  <div key={el.id} className={`product-cart-att`}>
+                    {el.id === "Color"
+                      ? this.colorSelect(el)
+                      : this.sizeSelect(el)}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div className="cart-product-price">
-            {this.state.symbol}
-            {this.state.price}
+          <div className="cart-product-amount">
+            <button
+              onClick={() =>
+                this.props.increaseAmountItem({
+                  ...this.props,
+                  productSelectedAttributes:
+                    this.state.productSelectedAttributes,
+                })
+              }
+            >
+              +
+            </button>
+            <p>{this.props.amount}</p>
+            <button
+              onClick={() =>
+                this.props.decreaseAmountItem({
+                  ...this.props,
+                  productSelectedAttributes:
+                    this.state.productSelectedAttributes,
+                })
+              }
+            >
+              -
+            </button>
           </div>
-          <div className="cart-product-attributes">
-            {this.props.attributes.map((el) => {
-              return (
-                <div key={el.id} className={`product-cart-att`}>
-                  {el.id === "Color"
-                    ? this.colorSelect(el)
-                    : this.sizeSelect(el)}
-                </div>
-              );
-            })}
+          <div className="cart-product-image">
+            <img src={this.props.gallery[0]} alt="product-" />
           </div>
         </div>
       </>
