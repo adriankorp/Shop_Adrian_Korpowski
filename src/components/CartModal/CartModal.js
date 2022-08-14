@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import withContext from "../../withContext";
 import CartItem from "./CartItem";
 import "./CartModal.css";
@@ -32,14 +33,14 @@ class CartModal extends Component {
   getNumberCartItems() {
     let cartKeys = Object.keys(this.props.context.cart || {});
     let cart = this.props.context.cart;
-   let total = 0
+    let total = 0;
     if (cartKeys) {
-      cartKeys.map(key => {
-        total += cart[key].amount
-      })
-      return total
+      cartKeys.map((key) => {
+        total += cart[key].amount;
+      });
+      return total;
     }
-    return 0
+    return 0;
   }
 
   render() {
@@ -62,8 +63,9 @@ class CartModal extends Component {
                   <CartItem
                     {...cartItem}
                     selectedCurrency={this.props.context.selectedCurrency}
-                    increaseAmountItem = {this.props.context.increaseAmountItem}
-                    decreaseAmountItem = {this.props.context.decreaseAmountItem}
+                    increaseAmountItem={this.props.context.increaseAmountItem}
+                    decreaseAmountItem={this.props.context.decreaseAmountItem}
+                    updateCart={this.props.context.updateCart}
                   />
                 );
               })}
@@ -76,7 +78,10 @@ class CartModal extends Component {
               </p>
             </div>
             <div className="checkout-viewbag-box">
-              <button className="viewbag-button">VIEW BAG</button>
+              <Link to="/cart" className="viewbag-button">
+                <p>VIEW BAG</p>
+              </Link>
+
               <button className="checkout-button">CHECKOUT</button>
             </div>
           </div>

@@ -175,8 +175,16 @@
   background: transparent;
   border: 1px solid black;
   width: 140px;
+  height: 42px;
   cursor: pointer;
+  color: inherit;
+  text-decoration: inherit; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+
 
 .viewbag-button:hover {
   background: black;

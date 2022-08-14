@@ -28,6 +28,11 @@ class Navbar extends Component {
     this.setState({
       show: !this.state.show,
     });
+    if (this.state.show) {
+      document.body.style.overflow = "unset";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
   };
 
   getNumberCartItems() {
@@ -45,7 +50,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     let categoryName = window.location.pathname.split("/")[2];
-    this.props.context.loadCategory(categoryName)
+    this.props.context.loadCategory(categoryName);
     client
       .query({
         query: LOAD_CURRENCIES,

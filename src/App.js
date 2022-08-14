@@ -13,6 +13,7 @@ import ProductCard from "./components/ProductCard/ProductCard";
 import Navbar from "./components/Navbar/Navbar";
 import ProductPage from "./components/ProductPage/ProductPage";
 import ProductList from "./components/ProductList/ProductList";
+import CartPage from "./components/CartPage/CartPage";
 
 export default class App extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export default class App extends Component {
       cart: {},
       products: [],
       selectedCurrency: "$",
+      loadedCategory: "",
     };
   }
 
@@ -30,6 +32,7 @@ export default class App extends Component {
   };
 
   loadCategory = (category) => {
+    this.setState({ loadedCategory: category });
     client
       .query({
         query: LOAD_PRODUCTS_OF_CATEGOTY,
@@ -45,7 +48,6 @@ export default class App extends Component {
 
     if (cart[cartItem.id]) {
       if (cart[cartItem.id].attributes) {
-      
         let cartKeys = cart[cartItem.id].productSelectedAttributes;
         let cartAddedItemKeys = cartItem.productSelectedAttributes;
         if (JSON.stringify(cartKeys) === JSON.stringify(cartAddedItemKeys)) {
@@ -67,9 +69,10 @@ export default class App extends Component {
   };
 
   updateCart = (cartItem) => {
+
     let cart = this.state.cart;
     if (cart[cartItem.id]) {
-      cart[cartItem.id] = cartItem;
+      cart[cartItem.id].productSelectedAttributes = cartItem.productSelectedAttributes;
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     this.setState({ cart });
@@ -77,7 +80,6 @@ export default class App extends Component {
 
   increaseAmountItem = (cartItem) => {
     let cart = this.state.cart;
-
 
     if (cart[cartItem.id]) {
       cart[cartItem.id].amount += 1;
@@ -140,6 +142,7 @@ export default class App extends Component {
           <Navbar />
           <Routes>
             <Route exact path="/category/:name" element={<ProductList />} />
+            <Route exact path="/cart" element={<CartPage />} />
 
             <Route exact path="/product/:id" element={<ProductPage />} />
           </Routes>

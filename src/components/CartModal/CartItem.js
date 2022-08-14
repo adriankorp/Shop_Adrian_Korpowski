@@ -37,6 +37,14 @@ export default class CartItem extends Component {
         [`${name}`]: attribute.value,
       },
     });
+
+    this.props.updateCart({
+      id: this.props.id,
+      productSelectedAttributes: {
+        ...this.state.productSelectedAttributes,
+        [`${name}`]: attribute.value,
+      },
+    });
   };
 
   sizeSelect = (attribute) => {
@@ -102,7 +110,6 @@ export default class CartItem extends Component {
     return (
       <>
         <div className="cart-conteiner-item">
-          {" "}
           <div className="cart-detalis">
             <div className="cart-product-name">
               <p>{this.props.brand}</p>

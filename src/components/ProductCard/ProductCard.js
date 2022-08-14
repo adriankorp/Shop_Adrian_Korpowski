@@ -26,7 +26,6 @@ class ProductCard extends Component {
     if (
       prevProps.context.selectedCurrency !== this.props.context.selectedCurrency
     ) {
-
       let currency = this.getPrice()[0];
       this.setState({
         price: currency.amount,
@@ -35,10 +34,10 @@ class ProductCard extends Component {
     }
   }
 
-  addToCartFromCard = (e,item) => {
+  addToCartFromCard = (e, item) => {
     e.preventDefault();
-    let newProductObject = {...item}
-    delete newProductObject.context
+    let newProductObject = { ...item };
+    delete newProductObject.context;
     this.props.context.addToCart({ ...newProductObject });
   };
 
@@ -60,8 +59,12 @@ class ProductCard extends Component {
               <div className="product-image">
                 <img src={this.props.gallery[0]} alt={this.props.name} />
                 {this.props.attributes.length === 0 ? (
-                  <button onClick={(e) => {this.addToCartFromCard(e,this.props)}}>
-                    <img src="cart-shopping-solid.svg" alt="cart" />
+                  <button
+                    onClick={(e) => {
+                      this.addToCartFromCard(e, this.props);
+                    }}
+                  >
+                    <img src={process.env.PUBLIC_URL + "/cart-shopping-solid.svg" }alt="cart" />
                   </button>
                 ) : (
                   <></>

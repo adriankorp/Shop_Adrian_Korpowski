@@ -4,7 +4,6 @@ import { client } from "../../index";
 import { split } from "@apollo/client";
 import "./ProductPage.css";
 
-
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 class ProductPage extends Component {
   constructor(props) {
@@ -30,7 +29,7 @@ class ProductPage extends Component {
         let { currency, amount } = res.data.product.prices.filter(
           (el) => el.currency.symbol === this.props.context.selectedCurrency
         )[0];
-   
+
         this.setState({
           product: res.data.product,
           mainImage: res.data.product.gallery[0],
@@ -44,11 +43,23 @@ class ProductPage extends Component {
     if (
       prevProps.context.selectedCurrency !== this.props.context.selectedCurrency
     ) {
-
       let currency = this.getPrice();
       this.setState({
         amount: currency.amount,
         currency: currency.currency.symbol,
+      });
+    }
+  }
+
+  addToCart() {
+    if (
+      this.state.product.attributes.length ===
+        Object.keys(this.state.productSelectedAttributes).length &&
+      this.state.product.inStock
+    ) {
+      this.props.context.addToCart({
+        ...this.state.product,
+        productSelectedAttributes: this.state.productSelectedAttributes,
       });
     }
   }
@@ -67,8 +78,6 @@ class ProductPage extends Component {
       },
     });
   };
-
-
 
   changeMainImage = (imageURL) => {
     this.setState({ mainImage: imageURL });
@@ -163,7 +172,6 @@ class ProductPage extends Component {
               </div>
               <div className="product-attributes">
                 {this.state.product.attributes.map((el) => {
-                  
                   return (
                     <div key={el.id} className={`product-att`}>
                       {el.id === "Color"
@@ -180,9 +188,16 @@ class ProductPage extends Component {
                 {this.state.amount}
               </p>
               <div className="btn-add-to-cart">
-                <button onClick={()=>{
-                  this.state.product.attributes.length === Object.keys(this.state.productSelectedAttributes).length && this.props.context.addToCart({...this.state.product, productSelectedAttributes:this.state.productSelectedAttributes})
-                }}>ADD TO CART</button>
+                <button
+                  style={
+                    this.state.product.inStock
+                      ? {}
+                      : { background: "grey", cursor: "default" }
+                  }
+                  onClick={()=>this.addToCart()}
+                >
+                  {this.state.product.inStock ? "ADD TO CARD" : "OUT OF STOCK"}
+                </button>
               </div>
 
               <div
@@ -194,7 +209,7 @@ class ProductPage extends Component {
             </div>
           </div>
         ) : (
-          <>Loading...</>
+          <></>
         )}
       </>
     );
