@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import withContext from "../../withContext";
 import { client } from "../../index";
-import { split } from "@apollo/client";
 import "./ProductPage.css";
 
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
