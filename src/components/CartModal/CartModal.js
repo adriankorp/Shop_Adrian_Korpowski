@@ -66,6 +66,7 @@ class CartModal extends Component {
                     increaseAmountItem={this.props.context.increaseAmountItem}
                     decreaseAmountItem={this.props.context.decreaseAmountItem}
                     updateCart={this.props.context.updateCart}
+                    key={cartItem.id}
                   />
                 );
               })}

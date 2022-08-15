@@ -55,12 +55,12 @@ export default class CartItem extends Component {
           {attribute.items.map((el) => {
             return (
               <button
+                key={el.id}
                 onClick={() => this.selectAttribute(el, attribute.name)}
                 className={`att-cart-box ${
                   this.state.productSelectedAttributes[attribute.name] ===
                     el.value && "att-active"
                 }`}
-                key={el.id}
               >
                 {el.value}
               </button>
@@ -78,8 +78,7 @@ export default class CartItem extends Component {
         <div className="color-cart-box-conteiner">
           {attribute.items.map((el) => {
             return (
-              <>
-                {" "}
+              <div key={el.name}>
                 <div
                   className={`color-cart-box ${
                     this.state.productSelectedAttributes[attribute.name] ===
@@ -95,10 +94,9 @@ export default class CartItem extends Component {
                       width: "16px",
                       height: "16px",
                     }}
-                    key={el.id}
                   ></div>
                 </div>
-              </>
+              </div>
             );
           })}
         </div>

@@ -24,6 +24,7 @@ class ProductPage extends Component {
       .query({
         query: LOAD_PRODUCT,
         variables: { id: productId },
+        fetchPolicy: 'no-cache'
       })
       .then((res) => {
         let { currency, amount } = res.data.product.prices.filter(
@@ -112,9 +113,10 @@ class ProductPage extends Component {
       <>
         <p>{attribute.name}:</p>
         <div className="color-box-conteiner">
-          {attribute.items.map((el) => {
+          {attribute.items.map((el, index) => {
             return (
               <div
+                key={index}
                 className={`color-box ${
                   this.state.productSelectedAttributes[attribute.name] ===
                     el.value && "color-box-active"
@@ -194,7 +196,7 @@ class ProductPage extends Component {
                       ? {}
                       : { background: "grey", cursor: "default" }
                   }
-                  onClick={()=>this.addToCart()}
+                  onClick={() => this.addToCart()}
                 >
                   {this.state.product.inStock ? "ADD TO CARD" : "OUT OF STOCK"}
                 </button>

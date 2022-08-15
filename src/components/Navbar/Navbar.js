@@ -50,7 +50,9 @@ class Navbar extends Component {
 
   componentDidMount() {
     let categoryName = window.location.pathname.split("/")[2];
-    this.props.context.loadCategory(categoryName);
+    if (this.state.categories.includes(categoryName))
+      this.props.context.loadCategory(categoryName);
+
     client
       .query({
         query: LOAD_CURRENCIES,

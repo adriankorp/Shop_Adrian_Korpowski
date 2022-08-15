@@ -1,15 +1,12 @@
-import { Routes, Route, Link, BrowserRouter as Router } from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { client } from "./index";
 import "./App.css";
 import React, { Component } from "react";
 import Context from "./Context";
 import {
-  LOAD_ALL_PRODUCTS,
-  LOAD_CATEGOTY,
-  LOAD_PRODUCT,
   LOAD_PRODUCTS_OF_CATEGOTY,
 } from "./GraphQL/Queries";
-import ProductCard from "./components/ProductCard/ProductCard";
+
 import Navbar from "./components/Navbar/Navbar";
 import ProductPage from "./components/ProductPage/ProductPage";
 import ProductList from "./components/ProductList/ProductList";
